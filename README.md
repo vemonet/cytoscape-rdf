@@ -1,10 +1,10 @@
 ## 🧬 A web component to visualize RDF with Cytoscape
 
-A [web component](https://www.webcomponents.org/introduction) to easily display [RDF](https://www.w3.org/RDF/) quads data as a [Cytoscape JS](https://js.cytoscape.org/) network. 
+A [web component](https://www.webcomponents.org/introduction) to easily display [RDF](https://www.w3.org/RDF/) quads data as a [Cytoscape JS](https://js.cytoscape.org/) network.
 
-This component has been built specifically to visualize [Nanopublications](https://nanopub.net/), but can be used with any RDF quads data (composed of subject, predicate, object, graph). 
+This component has been built specifically to visualize [Nanopublications](https://nanopub.net/), but can be used with any RDF quads data (composed of subject, predicate, object, graph).
 
-> ⚠️ Currently the component only supports RDF in the `trig` format 
+> ⚠️ Currently the component only supports RDF in the `trig` format
 
 ## Getting started
 
@@ -14,7 +14,7 @@ To install in a project:
 npm install --save cytoscape-rdf
 # or
 yarn add cytoscape-rdf
-# or
+# or import in a html file
 <script type="module" src="https://cdn.jsdelivr.net/npm/@vemonet/cytoscape-rdf/dist/cytoscape-rdf.min.js"></script>
 ```
 
@@ -33,7 +33,7 @@ Use in your HTML, or any other framework, to visualize RDF:
     <body>
         <div style="height: 100vh; width: 70%;">
             <cytoscape-rdf
-				url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU.trig"
+                url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU.trig"
                 id="cytoscapeNanopub"
             />
         </div>
@@ -70,7 +70,7 @@ Run in development:
 yarn dev
 ```
 
-Build: 
+Build:
 
 ```bash
 yarn build
