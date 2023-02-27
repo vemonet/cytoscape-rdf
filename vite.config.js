@@ -1,5 +1,7 @@
 import { defineConfig } from "vite";
+import dts from 'vite-plugin-dts';
 import { ViteMinifyPlugin } from 'vite-plugin-minify'
+import { terser } from "rollup-plugin-terser";
 
 // import { terser } from "rollup-plugin-terser";
 // import typescript from "@rollup/plugin-typescript";
@@ -42,11 +44,13 @@ export default defineConfig({
             // input: "src/index.ts",
             // output: [
             //     {
-            //         file: "dist/cytoscape-rdf.js",
+            //         // file: "dist/cytoscape-rdf.js",
+            //         dir: "dist",
             //         format: "esm",
             //     },
             //     {
-            //         file: "dist/cytoscape-rdf.min.js",
+            //         // file: "dist/cytoscape-rdf.min.js",
+            //         dir: "dist",
             //         format: "esm",
             //         plugins: [terser()],
             //     },
@@ -61,8 +65,10 @@ export default defineConfig({
             'cytoscape', 'cytoscape-popper', 'cytoscape-cose-bilkent'
         ]
     },
-    // plugins: [
-    //     // input https://www.npmjs.com/package/html-minifier-terser options
-    //     ViteMinifyPlugin({}),
-    // ],
+    plugins: [
+        dts(),
+        // terser(),
+        // input https://www.npmjs.com/package/html-minifier-terser options
+        // ViteMinifyPlugin({}),
+    ],
 });
