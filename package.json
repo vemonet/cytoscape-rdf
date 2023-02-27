@@ -1,6 +1,6 @@
 {
   "name": "cytoscape-rdf",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Vincent Emonet",
   "type": "module",
   "description": "A Web Component to display RDF quads data as cytoscape network",
@@ -19,7 +19,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "rollup": "tsc && vite build && rollup -c",
+    "rollup": "rollup -c",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -30,14 +30,19 @@
     "n3": "^1.16.3"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/cytoscape": "^3.19.9",
     "@types/cytoscape-popper": "^2.0.0",
     "@types/n3": "^1.10.4",
     "rollup": "^3.17.3",
+    "rollup-plugin-cleaner": "^1.0.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-filesize": "^9.1.2",
+    "rollup-plugin-serve": "^2.0.2",
     "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.5.4",
+    "rollup-plugin-transform-tagged-template": "^0.0.3",
+    "typescript": "^4.9.5",
     "vite": "^2.8.0",
     "vite-plugin-dts": "^2.0.2",
     "vite-plugin-minify": "^1.5.2"
