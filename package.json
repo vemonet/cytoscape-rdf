@@ -1,0 +1,32 @@
+{
+  "name": "cytoscape-rdf",
+  "private": true,
+  "version": "0.0.1",
+  "main": "dist/cytoscape-rdf.es.js",
+  "exports": {
+    ".": "./dist/cytoscape-rdf.es.js"
+  },
+  "types": "types/cytoscape-rdf.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "@microsoft/fast-element": "^1.7.0",
+    "cytoscape": "^3.23.0",
+    "cytoscape-cose-bilkent": "^4.1.0",
+    "cytoscape-popper": "^2.0.0",
+    "n3": "^1.16.3"
+  },
+  "devDependencies": {
+    "@types/cytoscape": "^3.19.9",
+    "@types/cytoscape-popper": "^2.0.0",
+    "@types/n3": "^1.10.4",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0"
+  }
+}
