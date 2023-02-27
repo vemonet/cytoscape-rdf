@@ -8,12 +8,14 @@ This component has been built specifically to visualize [Nanopublications](https
 
 ## Getting started
 
-Install:
+To install in a project:
 
 ```bash
 npm install --save cytoscape-rdf
 # or
 yarn add cytoscape-rdf
+# or
+<script type="module" src="https://cdn.jsdelivr.net/npm/@vemonet/cytoscape-rdf/dist/cytoscape-rdf.min.js"></script>
 ```
 
 Use in your HTML, or any other framework, to visualize RDF:
@@ -25,6 +27,7 @@ Use in your HTML, or any other framework, to visualize RDF:
         <title>Cytoscape RDF</title>
         <meta charset="UTF-8" />
         <script type="module" src="/src/cytoscape-rdf.ts"></script>
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@vemonet/cytoscape-rdf/dist/cytoscape-rdf.min.js"></script>
     </head>
 
     <body>

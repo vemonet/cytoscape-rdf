@@ -7,7 +7,10 @@
   "main": "dist/cytoscape-rdf.js",
   "unpkg": "dist/cytoscape-rdf.min.js",
   "exports": {
-    ".": "./dist/cytoscape-rdf*.js"
+    ".": {
+      "import": "./dist/cytoscape-rdf.es.js",
+      "require": "./dist/cytoscape-rdf.umd.js"
+    }
   },
   "types": "types/cytoscape-rdf.d.ts",
   "files": [
