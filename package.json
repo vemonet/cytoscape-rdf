@@ -1,25 +1,33 @@
 {
   "name": "cytoscape-rdf",
   "version": "0.0.4",
-  "author": "Vincent Emonet",
-  "type": "module",
   "description": "A Web Component to display RDF quads data as cytoscape network",
-  "main": "dist/cytoscape-rdf.es.js",
-  "unpkg": "dist/cytoscape-rdf.umd.js",
-  "exports": {
-    ".": {
-      "import": "./dist/cytoscape-rdf.es.js",
-      "require": "./dist/cytoscape-rdf.umd.js"
-    }
+  "author": {
+    "name": "Vincent Emonet",
+    "email": "vincent.emonet@gmail.com",
+    "url": "https://vemonet.github.io"
   },
+  "type": "module",
+  "main": "dist/cytoscape-rdf.js",
+  "unpkg": "dist/cytoscape-rdf.min.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/cytoscape-rdf.js"
+    },
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./package.json": "./package.json"
+  },
+  "customElements": "dist/custom-elements.json",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "rollup": "rollup -c",
+    "build:vite": "vite build",
+    "build": "rollup -c",
+    "postbuild": "cem analyze",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -30,6 +38,8 @@
     "n3": "^1.16.3"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.6.8",
+    "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/cytoscape": "^3.19.9",
@@ -39,6 +49,8 @@
     "rollup-plugin-cleaner": "^1.0.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-filesize": "^9.1.2",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-serve": "^2.0.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-transform-tagged-template": "^0.0.3",
