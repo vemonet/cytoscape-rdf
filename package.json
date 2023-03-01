@@ -1,6 +1,6 @@
 {
   "name": "cytoscape-rdf",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Web Component to display RDF quads data as cytoscape network",
   "author": {
     "name": "Vincent Emonet",
