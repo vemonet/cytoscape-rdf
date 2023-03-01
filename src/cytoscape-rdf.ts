@@ -78,6 +78,13 @@ export class CytoscapeRdf extends FASTElement {
           showOverlay: true,
         };
 
+        // TODO: Fix issue with ctr not defined? https://stackoverflow.com/questions/43998777/cytoscape-typeerror-even-with-the-tutorial
+        // setTimeout(this.render)
+        // setTimeout( () => {
+        //   console.log("Delayed for 1 second.");
+        // }, 1000)
+
+        // await document.querySelector('parent-custom')?.domReady();
         // @ts-ignore
         const cy = cytoscape(config);
 

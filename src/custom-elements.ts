@@ -4,7 +4,7 @@
 // before it has been set by react
 import React from 'react';
 
-declare namespace JSX {
+export declare namespace JSX {
     interface IntrinsicElements {
         "cytoscape-rdf": React.DetailedHTMLProps<
             React.HTMLAttributes<HTMLElement>,

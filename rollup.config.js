@@ -14,7 +14,6 @@ const plugins = [
             // declarationDir: "types/",
         },
     }),
-    // TODO: resolves imports, but fail due to N3.js https://github.com/rdfjs/N3.js/issues/257
     commonjs(),
     nodeResolve({ preferBuiltins: false }),
     // nodeGlobals(),
@@ -41,4 +40,15 @@ export default [
         ],
         plugins,
     },
+    // {
+    //     input: './src/custom-elements.d.ts',
+    //     output: [
+    //         {
+    //             file: 'dist/custom-elements.d.ts', format: 'esm'
+    //         },
+    //     ],
+    //     plugins: [
+    //         // dts(),
+    //     ],
+    // },
 ];
