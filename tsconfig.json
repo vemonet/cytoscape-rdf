@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "target": "es2015",
+    "lib": ["ES2015", "es2017", "dom"],
+    "moduleResolution": "Node16",
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "./dist",
@@ -10,13 +12,12 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noImplicitAny": false,
-    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": false,
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "importHelpers": true
   },
-  "include": ["src/**/*.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src"]
 }
