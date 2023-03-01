@@ -65,72 +65,75 @@ export class CytoscapeRdf extends FASTElement {
         this.elements = rdfToCytoscape(this.rdf)
       }
 
-      const config = {
-        container: document.getElementById(this.id),
-        style: this.cytoscapeStyle,
-        elements: this.elements,
-        layout: this.layout,
-        boxSelectionEnabled: true,
-        autounselectify: true,
-        autoungrabify: false,
-        wheelSensitivity: 0.1,
-        showOverlay: true,
-      };
+      if (typeof document === "object") {
+        const config = {
+          container: document.getElementById(this.id),
+          style: this.cytoscapeStyle,
+          elements: this.elements,
+          layout: this.layout,
+          boxSelectionEnabled: true,
+          autounselectify: true,
+          autoungrabify: false,
+          wheelSensitivity: 0.1,
+          showOverlay: true,
+        };
 
-      // @ts-ignore
-      const cy = cytoscape(config);
+        // @ts-ignore
+        const cy = cytoscape(config);
 
-      // Add on click actions to show cards with more details on an object
-      cy.on('tap', "node", function (e: any) {
-        cy.edges().style({
-          'line-color': '#263238', 'color': '#263238',
-          'width': 2, 'target-arrow-color': '#263238',
-          'font-size': '30px'
-        }); // Grey
-        var ele = e.target;
-        ele.connectedEdges().style({
-          'line-color': '#c62828', 'color': '#c62828', // red
-          'width': 4, 'target-arrow-color': '#c62828',
-          'font-size': '40px',
+        // Add on click actions to show cards with more details on an object
+        cy.on('tap', "node", function (e: any) {
+          cy.edges().style({
+            'line-color': '#263238', 'color': '#263238',
+            'width': 2, 'target-arrow-color': '#263238',
+            'font-size': '30px'
+          }); // Grey
+          var ele = e.target;
+          ele.connectedEdges().style({
+            'line-color': '#c62828', 'color': '#c62828', // red
+            'width': 4, 'target-arrow-color': '#c62828',
+            'font-size': '40px',
+          });
         });
-      });
-      // Show a card with the value of the node (e.g. clickable link for URI)
-      cy.on('tap', 'node', function (e: any) {
-        const oldEle = document.getElementById("cytoPop");
-        if (oldEle) oldEle.remove();
-        var ele = e.target;
-
-        ele.popper({
-          content: () => {
-            // console.log(ele)
-            let div = document.createElement('div');
-            // Replace the start "graph-http" for graphs nodes URIs
-            const elementLabel = (ele.id().startsWith('graph-http')) ? ele.id().replace('graph-http', 'http') : ele.id()
-
-            // TODO: improve
-            div.innerHTML = `<div id="cytoPop" class="cytoscapePop"
-              style="background: #eceff1; padding: 8px; border-radius: 8px;"
-            >
-              <span>${displayLink(elementLabel)}</span>
-            </div>`
-            document.body.appendChild( div );
-            return div;
-          }
-        });
-      });
-      // Remove Card when click on the canvas
-      cy.on('tap', function(event: any){
-        if( event.target === cy ){
-          // tap on background
+        // Show a card with the value of the node (e.g. clickable link for URI)
+        cy.on('tap', 'node', function (e: any) {
           const oldEle = document.getElementById("cytoPop");
           if (oldEle) oldEle.remove();
-        }
-      });
-      // TODO: Remove Card when click outside the canvas
-      // cy.on('click touchend', function(event: any){
-      //   event.stopPropagation()
-      // });
+          var ele = e.target;
 
+          ele.popper({
+            content: () => {
+              // console.log(ele)
+              let div = document.createElement('div');
+              // Replace the start "graph-http" for graphs nodes URIs
+              const elementLabel = (ele.id().startsWith('graph-http')) ? ele.id().replace('graph-http', 'http') : ele.id()
+
+              // TODO: improve
+              div.innerHTML = `<div id="cytoPop" class="cytoscapePop"
+                style="background: #eceff1; padding: 8px; border-radius: 8px;"
+              >
+                <span>${displayLink(elementLabel)}</span>
+              </div>`
+              document.body.appendChild( div );
+              return div;
+            }
+          });
+        });
+        // Remove Card when click on the canvas
+        cy.on('tap', function(event: any){
+          if( event.target === cy ){
+            // tap on background
+            if (typeof document === "object") {
+              const oldEle = document.getElementById("cytoPop");
+              if (oldEle) oldEle.remove();
+            }
+          }
+        });
+        // TODO: Remove Card when click outside the canvas
+        // cy.on('click touchend', function(event: any){
+        //   event.stopPropagation()
+        // });
+      }
     }
 
 
