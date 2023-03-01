@@ -47,6 +47,8 @@
     "@types/cytoscape": "^3.19.9",
     "@types/cytoscape-popper": "^2.0.0",
     "@types/n3": "^1.10.4",
+    "@types/react": "^18.0.28",
+    "react": "^18.2.0",
     "rollup": "^3.17.3",
     "rollup-plugin-cleaner": "^1.0.0",
     "rollup-plugin-copy": "^3.4.0",
