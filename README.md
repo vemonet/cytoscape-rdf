@@ -1,6 +1,6 @@
-## 🧬 A web component to visualize RDF with Cytoscape
+## 🧬 A Web Component to visualize RDF with Cytoscape
 
-A [web component](https://www.webcomponents.org/introduction) to easily display [RDF](https://www.w3.org/RDF/) quads data as a [Cytoscape JS](https://js.cytoscape.org/) network.
+A [Web Component](https://www.webcomponents.org/introduction) to easily display [RDF](https://www.w3.org/RDF/) quads data as a [Cytoscape JS](https://js.cytoscape.org/) network in any HTML file without any dependency.
 
 This component has been built specifically to visualize [Nanopublications](https://nanopub.net/), but can be used with any RDF quads data (composed of subject, predicate, object, graph).
 
@@ -8,17 +8,7 @@ This component has been built specifically to visualize [Nanopublications](https
 
 ## Getting started
 
-To install in a project:
-
-```bash
-npm install --save cytoscape-rdf
-# or
-yarn add cytoscape-rdf
-# or import in a html file
-<script type="module" src="https://cdn.jsdelivr.net/npm/@vemonet/cytoscape-rdf/dist/cytoscape-rdf.min.js"></script>
-```
-
-Use in your HTML, or any other framework, to visualize RDF:
+`<cytoscape-rdf>` can be easily used in any HTML file to generate a cytoscape visualization for RDF available at a specific URL, just import the JS module first:
 
 ```html
 <!DOCTYPE html>
@@ -26,26 +16,42 @@ Use in your HTML, or any other framework, to visualize RDF:
     <head>
         <title>Cytoscape RDF</title>
         <meta charset="UTF-8" />
-        <script type="module" src="/src/cytoscape-rdf.ts"></script>
-        <script type="module" src="https://cdn.jsdelivr.net/npm/@vemonet/cytoscape-rdf/dist/cytoscape-rdf.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <script type="module" src="https://cdn.jsdelivr.net/npm/cytoscape-rdf@0.0.11/dist/cytoscape-rdf.min.js"></script>
     </head>
 
-    <body>
-        <div style="height: 100vh; width: 70%;">
-            <cytoscape-rdf
-                url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU.trig"
-                id="cytoscapeNanopub"
-            />
-        </div>
+    <body style="font-family: Arial, sans-serif;">
+        <main style="display: flex; flex-direction: column; align-items: center;">
+            <h2>Visualize RDF quads with Cytoscape</h2>
+            <div style="height: 100vh; width: 70%;">
+                
+                <cytoscape-rdf
+                    url="https://purl.org/np/RAHtkscyyyJDLvWRuINckQrn5rbHzQKvwakNVC3fmRzGU.trig"
+                    id="cytoscapeNanopub"
+                />
+                
+            </div>
+        </main>
     </body>
 </html>
 ```
 
-Attributes available on `<cytoscape-rdf>`:
+It can be also installed in your project using `npm` or `yarn`:
+
+```bash
+npm install --save cytoscape-rdf
+# or
+yarn add cytoscape-rdf
+```
+
+Then import it with `import "cytoscape-rdf";`
+
+Attributes available on `<cytoscape-rdf>` are:
 
 * `url`: to pass a URL to retrieve the RDF to display
 * `rdf`: to pass the RDF directly as a string in the `trig` format
-* `elements`: to pass directly the cytoscape elements
+* `elements`: to pass directly the cytoscape elements generated from the RDF
 * `cytoscapeStyle`: to pass the style object for cytoscape
 * `layout`: to pass the layout object for cytoscape
 
