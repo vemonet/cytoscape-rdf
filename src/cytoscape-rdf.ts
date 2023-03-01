@@ -139,8 +139,18 @@ export class CytoscapeRdf extends FASTElement {
 
     disconnectedCallback() {
       super.disconnectedCallback();
-      const oldEle = document.getElementById("cytoPop");
-      if (oldEle) oldEle.remove();
+      if (typeof document === "object") {
+        const oldEle = document.getElementById("cytoPop");
+        if (oldEle) oldEle.remove();
+      }
     }
 
 }
+
+// declare global {
+//   namespace JSX {
+//     interface IntrinsicElements {
+//       ['cytoscape-rdf']: CustomElement<CytoscapeRdf>;
+//     }
+//   }
+// }

@@ -7,28 +7,9 @@ import typescript from "@rollup/plugin-typescript";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import nodeGlobals from 'rollup-plugin-node-globals'
 
-
-// import { terser } from "rollup-plugin-terser";
-// import typescript from "@rollup/plugin-typescript";
-// import filesize from "rollup-plugin-filesize";
-
 // import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
 // import { NodeModulesPolyfillPlugin } from "@esbuild-plugins/node-modules-polyfill";
 // import rollupNodePolyFill from "rollup-plugin-node-polyfills";
-
-
-// const plugins = [
-//     typescript({
-//         compilerOptions: {
-//             declaration: false,
-//             declarationDir: undefined,
-//         },
-//     }),
-//     filesize({
-//         showMinifiedSize: false,
-//         showBrotliSize: true,
-//     }),
-// ];
 
 const plugins = [
     typescript({
