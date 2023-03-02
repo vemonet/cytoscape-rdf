@@ -1,5 +1,6 @@
 import {
     attr,
+    ref,
     html,
     css,
     customElement,
@@ -7,7 +8,7 @@ import {
     when,
     FASTElement,
 } from "@microsoft/fast-element";
-import cytoscape from 'cytoscape';
+import cytoscape, { Core } from 'cytoscape';
 import popper from 'cytoscape-popper';
 import COSEBilkent from 'cytoscape-cose-bilkent';
 
@@ -17,8 +18,10 @@ import { rdfToCytoscape, displayLink } from './utils'
 cytoscape.use(popper);
 cytoscape.use(COSEBilkent);
 
+// <div id="cytoscapeRdf" ${ref('cyContainer')}><slot></slot></div>
+// <div id=${x => x.id}><slot></slot></div>
 const template = html<CytoscapeRdf>`
-  <div id=${x => x.id}><slot></slot></div>
+  <div class="cytoscapeContainer" ${ref('cyContainer')}></div>
 
   ${when(x => !x.elements, html<CytoscapeRdf>`
     Loading...
@@ -32,6 +35,11 @@ const styles = css`
     width: 100%;
   }
 
+  .cytoscapeContainer {
+    width: 100%;
+    height: 100%;
+  }
+
   .cytoscapePop {
     background: #eceff1;
     padding: 8px;
@@ -39,10 +47,16 @@ const styles = css`
   }
 `;
 
+
+// Stencil cytoscape web component: https://github.com/graphaware/ga-cytoscape/blob/master/src/components/ga-cytoscape/ga-cytoscape.tsx
 @customElement({
     name: "cytoscape-rdf",
     template,
     styles,
+    // shadowOptions: {
+    //   delegatesFocus: true,
+    //   mode: 'open',
+    // },
 })
 export class CytoscapeRdf extends FASTElement {
     @attr id: string = "cytoscapeRdf";
@@ -50,6 +64,9 @@ export class CytoscapeRdf extends FASTElement {
     @attr rdf: string = "";
     @attr elements: any = null;
     @attr cytoscapeStyle: any = defaultCytoscapeStyle;
+
+    cyContainer?: HTMLDivElement;
+    cy?: Core;
 
     @observable
     public layout: any = layoutsConfig['cose-bilkent'];
@@ -65,9 +82,10 @@ export class CytoscapeRdf extends FASTElement {
         this.elements = rdfToCytoscape(this.rdf)
       }
 
+      console.log(this.cyContainer)
       if (typeof document === "object") {
         const config = {
-          container: document.getElementById(this.id),
+          container: this.cyContainer,
           style: this.cytoscapeStyle,
           elements: this.elements,
           layout: this.layout,
@@ -84,13 +102,11 @@ export class CytoscapeRdf extends FASTElement {
         //   console.log("Delayed for 1 second.");
         // }, 1000)
 
-        // await document.querySelector('parent-custom')?.domReady();
-        // @ts-ignore
-        const cy = cytoscape(config);
+        this.cy = cytoscape(config);
 
         // Add on click actions to show cards with more details on an object
-        cy.on('tap', "node", function (e: any) {
-          cy.edges().style({
+        this.cy.on('tap', "node",  (e: any) => {
+          this.cy?.edges().style({
             'line-color': '#263238', 'color': '#263238',
             'width': 2, 'target-arrow-color': '#263238',
             'font-size': '30px'
@@ -103,7 +119,7 @@ export class CytoscapeRdf extends FASTElement {
           });
         });
         // Show a card with the value of the node (e.g. clickable link for URI)
-        cy.on('tap', 'node', function (e: any) {
+        this.cy.on('tap', 'node', (e: any) => {
           const oldEle = document.getElementById("cytoPop");
           if (oldEle) oldEle.remove();
           var ele = e.target;
@@ -127,8 +143,8 @@ export class CytoscapeRdf extends FASTElement {
           });
         });
         // Remove Card when click on the canvas
-        cy.on('tap', function(event: any){
-          if( event.target === cy ){
+        this.cy.on('tap', (event: any) => {
+          if( event.target === this.cy ){
             // tap on background
             if (typeof document === "object") {
               const oldEle = document.getElementById("cytoPop");
@@ -146,10 +162,14 @@ export class CytoscapeRdf extends FASTElement {
 
     disconnectedCallback() {
       super.disconnectedCallback();
-      if (typeof document === "object") {
-        const oldEle = document.getElementById("cytoPop");
-        if (oldEle) oldEle.remove();
+      if (this.cy) {
+        this.cy.destroy();
+        this.cy = undefined;
       }
+      // if (typeof document === "object") {
+      //   const oldEle = document.getElementById("cytoPop");
+      //   if (oldEle) oldEle.remove();
+      // }
     }
 
 }

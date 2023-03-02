@@ -33,6 +33,8 @@ dist/
 # Ignore build www directories
 www/
 storybook-static
+build/
+docs-dist/
 
 # Ignore Mac .DS_Store
 .DS_Store
@@ -49,6 +51,7 @@ storybook-static
 .history/
 
 # Stores VSCode versions used for testing VSCode extensions
+.vscode
 .vscode-test
 
 # Ignore Intellij IDEA
