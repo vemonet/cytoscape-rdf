@@ -11,9 +11,6 @@
   "main": "dist/cytoscape-rdf.js",
   "unpkg": "dist/cytoscape-rdf.min.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
