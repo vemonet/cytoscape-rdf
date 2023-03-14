@@ -1,54 +1,38 @@
-// https://github.com/microsoft/fast/blob/master/packages/web-components/fast-element/rollup.config.js
-import filesize from "rollup-plugin-filesize";
-import { terser } from "rollup-plugin-terser";
-import typescript from "@rollup/plugin-typescript";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
-import nodeGlobals from 'rollup-plugin-node-globals'
+// https://lit.dev/docs/tools/production/
+// https://github.com/rollup/plugins/tree/master/packages/commonjs
+
+import summary from 'rollup-plugin-summary';
+import resolve from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
-import nodeBuiltins from 'rollup-plugin-node-builtins';
 
-const plugins = [
-    typescript({
-        compilerOptions: {
-            declaration: true,
-            // declarationDir: "types/",
-        },
-    }),
-    commonjs(),
-    nodeResolve({ preferBuiltins: false }),
-    // nodeGlobals(),
-    // nodeBuiltins(),
-    filesize({
-        showMinifiedSize: false,
-        showBrotliSize: true,
-    }),
-];
-
-export default [
+export default {
+  input: 'dist/cytoscape-rdf.js',
+  output: [
     {
-        input: "src/index.ts",
-        output: [
-            {
-                file: "dist/cytoscape-rdf.js",
-                format: "esm",
-            },
-            {
-                file: "dist/cytoscape-rdf.min.js",
-                format: "esm",
-                plugins: [terser()],
-            },
-        ],
-        plugins,
+      file: 'dist/cytoscape-rdf.js',
+      format: 'esm',
     },
-    // {
-    //     input: './src/custom-elements.d.ts',
-    //     output: [
-    //         {
-    //             file: 'dist/custom-elements.d.ts', format: 'esm'
-    //         },
-    //     ],
-    //     plugins: [
-    //         // dts(),
-    //     ],
-    // },
-];
+  ],
+  // No external for testing, everything needs to be bundled
+  external: process.env.BUNDLE ? [] : [/lit/, /n3/],
+  plugins: [
+    replace({
+      preventAssignment: true,
+      'Reflect.decorate': 'undefined',
+    }),
+    commonjs({
+      // include: 'node_modules/**',
+    }),
+    // Resolve bare module specifiers to relative paths
+    resolve({preferBuiltins: true, browser: true}),
+    // Minify HTML template literals
+    // minifyHTML(),
+    summary(),
+  ],
+  onwarn(warning) {
+    if (warning.code !== 'THIS_IS_UNDEFINED') {
+      console.error(`(!) ${warning.message}`);
+    }
+  },
+};

@@ -1,23 +1,35 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    "target": "es2015",
-    "lib": ["ES2015", "es2017", "dom"],
-    "moduleResolution": "Node16",
+    "target": "ES2019",
+    "module": "ES2015",
+    "moduleResolution": "node",
+    "lib": ["ES2019", "DOM"],
+    "useDefineForClassFields": false,
     "declaration": true,
-    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "inlineSources": true,
     "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
+    "noImplicitThis": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "useDefineForClassFields": false,
-    "strictPropertyInitialization": false,
-    "importHelpers": true
+    "noImplicitOverride": true,
+    "removeComments": true,
+    "plugins": [
+      {
+        "name": "ts-lit-plugin",
+        "strict": true
+      }
+    ]
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts"],
+  "exclude": []
 }

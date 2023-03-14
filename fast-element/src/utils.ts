@@ -1,51 +1,5 @@
 import { Parser } from 'n3';
 
-
-export const defaultNodeClick = (e: any) => {
-    const oldEle = document.getElementById("cytoscapePop");
-    if (oldEle) oldEle.remove();
-    const ele = e.target;
-
-    ele.popper({
-      content: () => {
-        const div = document.createElement('div');
-
-        // Replace the start "graph-http" for graphs nodes URIs
-        const elementLabel = (ele.id().startsWith('graph-http')) ? ele.id().replace('graph-http', 'http') : ele.id()
-
-        // TODO: improve
-        div.innerHTML = `<div id="cytoscapePop" class="cytoscapePopper"
-          style="background: #eceff1; padding: 8px; border-radius: 8px;"
-        >
-          <span>${displayLink(elementLabel)}</span>
-        </div>`
-        document.body.appendChild( div );
-
-        if (window) {
-          // Handle when click out of the popper
-          setTimeout(() => window.addEventListener('click', handleClickOut), 0);
-          // window.addEventListener('click', (e: any) => this._handleClickOut(e))
-        }
-        return div;
-      }
-    });
-  }
-
-  // /**
-  //  * Close the display selection dropdown window if click outside of it
-  //  */
-const handleClickOut = (e: any) => {
-    const popEle = document.getElementById("cytoscapePop");
-
-    if (window && !popEle?.contains(e.originalTarget)) {
-        window.removeEventListener('click', handleClickOut);
-        popEle?.remove()
-    }
-};
-
-
-
-
 export const rdfToCytoscape = async (rdf: string) => {
     const parser = new Parser({ format: 'application/trig' })
     const cytoscapeElems: any = []
